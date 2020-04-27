@@ -10,7 +10,7 @@ Consider adding the floating point number `300 / 293` many times. 72 times in fa
 import { λ, _, add, div } from 'lambda-math';
 
 λ( div, [300, 293] )
- ( add, [λ[0], λ[0]], [_, λ[0]], 70);
+ ( add, [λ[0], λ[0]], [_, λ[0]], 70 );
 
 console.log(λ[1].number); // 73.72013651877133
 ```
