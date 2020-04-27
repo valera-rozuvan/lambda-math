@@ -2,6 +2,8 @@
 
 Pseudo lambda expressions for JS arbitrary-precision arithmetic operations.
 
+**NOTE: Under development. Most of the functionality is still not working.**
+
 ## Example
 
 Consider adding the floating point number `300 / 293` many times. 72 times in fact. Now, we don't want to simply multiply a number by 72. We want to add it 72 times, so that we can clearly see the problem with floating point rounding which exists in standard JavaScript. So, using `lambda-math` library, we can write:
