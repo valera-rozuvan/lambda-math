@@ -17,8 +17,12 @@ function _() {
 
 }
 
-function add() {
+function add(x, y) {
+  if (typeof x === 'undefined' || x === null || !x) {
+    throw new TypeError('add: Must be invoked with 2 params!');
+  }
 
+  return x + y;
 }
 
 function sub() {
