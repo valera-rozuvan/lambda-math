@@ -1,3 +1,56 @@
+
+function add(x, y) {
+  return x + y;
+}
+
+function mult(x, y) {
+  return x * y;
+}
+
+function div(x, y) {
+  return x / y;
+}
+
+function log(msg) {
+  console.log(msg);
+}
+
+// And now:
+
+_f( add, [2, 6], mult, [_, 10], log, [_] );
+
+// is the same as:
+
+λ.prec(50);
+
+λ( add, [2, 4], [_, 6], [_, 8] );
+λ( mul, [3, _], [_, 5] );
+λ( add, [_, 8] );
+λ( div, [λ[2], λ[3]] );
+
+var retVal = _.prec(10);
+
+// is the same as:
+
+λ.setup(3);
+λ.precision(50);
+
+λ( add, [2, 4], [_, 6], [_, 8] )
+ ( mul, [31324138947, λ[0]], [_, 10000000] )
+ ( add, [λ[1], 8] )
+ ( div, [λ[1], λ[2]], [_, λ[2]], 6 );
+
+var retVal = λ[5].number(12);
+// retVal is a regular JavaScript number, with at most 12 digits after the decimal point.
+
+λ.clear();
+
+// is the same as:
+
+log(mult(add(2, 6), 10));
+
+/* ------------------------------------------------------------ */
+
 function one1(event, a, b, c) {
     event.preventDefault();
 
