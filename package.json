@@ -1,6 +1,6 @@
 {
   "name": "lambda-math",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Pseudo lambda expressions for JS arbitrary-precision arithmetic operations.",
   "main": "src/index.js",
   "scripts": {
