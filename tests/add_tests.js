@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 
 const add = require('../src/index').add;
 
-describe('lambda', function () {
+describe('add', function () {
   it('should be defined', function () {
     expect(add).to.not.be.undefined;
   });
