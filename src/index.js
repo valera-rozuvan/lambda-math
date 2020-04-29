@@ -25,7 +25,7 @@ function add(x, y) {
   return x + y;
 }
 
-function sub() {
+function sub(x, y) {
   if (typeof x === 'undefined' || x === null || !x) {
     throw new TypeError('sub: Must be invoked with 2 params!');
   }
