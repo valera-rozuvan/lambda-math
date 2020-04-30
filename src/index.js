@@ -1,10 +1,20 @@
+const uuidv4 = require('uuid').v4;
 const BigNumber = require('bignumber.js');
+
+const resultsStore = {};
+let λ_call_count = -1;
 
 function λ() {
   const func = arguments[0];
   const funcArgsSet = [];
   let repeatLastFuncTimes = 1;
   let c1;
+
+  const CALL_ID = uuidv4();
+  resultsStore[CALL_ID] = 0;
+
+  λ_call_count += 1;
+  λ[λ_call_count] = new BigNumber(0);
 
   if (!(func instanceof Function)) {
     throw new TypeError('λ: 1st param should be a function!');
@@ -46,17 +56,55 @@ function λ() {
     c1 += 1;
   }
 
+  funcArgsSet.forEach(function (args) {
+    [args[0], args[1]].forEach((param) => {
+      if (
+        (typeof param === 'undefined' || param === null || Number.isNaN(param) === true) ||
+        (typeof param !== 'number' && param.constructor !== BigNumber && param !== _)
+      ) {
+        throw new TypeError(`Error! Array item must be a number, a BigNumber, or "_".`);
+      }
+    });
+  });
+
+  funcArgsSet.forEach(function (args) {
+    if (args[0] === _) {
+      args[0] = _(CALL_ID);
+    }
+
+    if (args[1] === _) {
+      args[1] = _(CALL_ID);
+    }
+
+    resultsStore[CALL_ID] = func(args[0], args[1]);
+  });
+
+  λ[λ_call_count] = resultsStore[CALL_ID];
+
   return λ;
 }
 
-function _() {
+λ.reset = function () {
+  let prop;
 
+  for (prop in resultsStore) {
+    if (Object.prototype.hasOwnProperty.call(resultsStore, prop)) {
+      resultsStore.prop = undefined;
+      delete resultsStore.prop;
+    }
+  }
+
+  λ_call_count = -1;
+};
+
+function _(callId) {
+  return resultsStore[callId];
 }
 
 function verifyFuncParams(funcName, x, y) {
   [x, y].forEach((param, idx) => {
     if (
-      (typeof param === 'undefined' || param === null || isNaN(param) === true) ||
+      (typeof param === 'undefined' || param === null || Number.isNaN(param) === true) ||
       (typeof param !== 'number' && param.constructor !== BigNumber)
     ) {
       const paramName = (idx === 0) ? 'First' : 'Second';
