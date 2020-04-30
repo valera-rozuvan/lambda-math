@@ -19,17 +19,21 @@ function _() {
 
 }
 
-function add(x, y) {
+function verifyFuncParams(funcName, x, y) {
   [x, y].forEach((param, idx) => {
     if (
-      (typeof param === 'undefined' || typeof param === 'boolean' || param === null || isNaN(param) === true) ||
+      (typeof param === 'undefined' || param === null || isNaN(param) === true) ||
       (typeof param !== 'number' && param.constructor !== BigNumber)
     ) {
       const paramName = (idx === 0) ? 'First' : 'Second';
 
-      throw new TypeError(`add: Error! ${paramName} param must be a number or a BigNumber.`);
+      throw new TypeError(`${funcName}: Error! ${paramName} param must be a number or a BigNumber.`);
     }
   });
+}
+
+function add(x, y) {
+  verifyFuncParams('add', x, y);
 
   if (typeof x === 'number') {
     x = new BigNumber(x);
@@ -43,11 +47,17 @@ function add(x, y) {
 }
 
 function sub(x, y) {
-  if (typeof x === 'undefined' || x === null || !x) {
-    throw new TypeError('sub: Must be invoked with 2 params!');
+  verifyFuncParams('sub', x, y);
+
+  if (typeof x === 'number') {
+    x = new BigNumber(x);
   }
 
-  return x - y;
+  if (typeof y === 'number') {
+    y = new BigNumber(y);
+  }
+
+  return x.minus(y);
 }
 
 function mul() {
