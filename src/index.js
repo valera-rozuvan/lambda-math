@@ -68,8 +68,12 @@ function mul(x, y) {
   return x.times(y);
 }
 
-function div() {
+function div(x, y) {
+  verifyFuncParams('div', x, y);
 
+  ({x, y} = convertFuncParams(x, y));
+
+  return x.div(y);
 }
 
 module.exports = {
