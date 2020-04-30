@@ -32,9 +32,7 @@ function verifyFuncParams(funcName, x, y) {
   });
 }
 
-function add(x, y) {
-  verifyFuncParams('add', x, y);
-
+function convertFuncParams(x, y) {
   if (typeof x === 'number') {
     x = new BigNumber(x);
   }
@@ -42,6 +40,14 @@ function add(x, y) {
   if (typeof y === 'number') {
     y = new BigNumber(y);
   }
+
+  return {x, y};
+}
+
+function add(x, y) {
+  verifyFuncParams('add', x, y);
+
+  ({x, y} = convertFuncParams(x, y));
 
   return x.plus(y);
 }
@@ -49,19 +55,17 @@ function add(x, y) {
 function sub(x, y) {
   verifyFuncParams('sub', x, y);
 
-  if (typeof x === 'number') {
-    x = new BigNumber(x);
-  }
-
-  if (typeof y === 'number') {
-    y = new BigNumber(y);
-  }
+  ({x, y} = convertFuncParams(x, y));
 
   return x.minus(y);
 }
 
-function mul() {
+function mul(x, y) {
+  verifyFuncParams('mul', x, y);
 
+  ({x, y} = convertFuncParams(x, y));
+
+  return x.times(y);
 }
 
 function div() {

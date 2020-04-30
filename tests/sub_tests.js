@@ -75,25 +75,25 @@ describe('sub', function () {
   });
 
   describe('arithmetic', function () {
-    it('should sub 2 JS numbers', function () {
+    it('should subtract 2 JS numbers', function () {
       const result = sub(4, 2);
 
       expect(result.toNumber()).to.equal(2);
     });
 
-    it('should sub 1 JS numbers and 1 BigNumber', function () {
+    it('should subtract 1 JS numbers and 1 BigNumber', function () {
       const result = sub(4, new BigNumber(2));
 
       expect(result.toNumber()).to.equal(2);
     });
 
-    it('should sub 1 BigNumber and 1 JS number', function () {
+    it('should subtract 1 BigNumber and 1 JS number', function () {
       const result = sub(new BigNumber(4), 2);
 
       expect(result.toNumber()).to.equal(2);
     });
 
-    it('should sub 2 BigNumber values', function () {
+    it('should subtract 2 BigNumber values', function () {
       const result = sub(new BigNumber(4), new BigNumber(2));
 
       expect(result.toNumber()).to.equal(2);
