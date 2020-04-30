@@ -22,5 +22,8 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^7.1.2"
+  },
+  "dependencies": {
+    "bignumber.js": "^9.0.0"
   }
 }
