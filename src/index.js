@@ -6,6 +6,10 @@ function λ() {
   let repeatLastFuncTimes = 1;
   let c1;
 
+  if (!(func instanceof Function)) {
+    throw new TypeError('λ: 1st param should be a function!');
+  }
+
   if (
     (func !== add) &&
     (func !== sub) &&
@@ -26,15 +30,15 @@ function λ() {
     if (typeof arguments[c1] === 'number') {
       repeatLastFuncTimes = Math.floor(arguments[c1]);
 
-      if (Number.isNaN(repeatLastFuncTimes) === true || repeatLastFuncTimes <= 0) {
+      if (Number.isNaN(repeatLastFuncTimes) || repeatLastFuncTimes <= 0) {
         throw new Error('λ: Repeat last function call times should be a positive number!');
       }
 
       if (typeof arguments[c1 + 1] !== 'undefined') {
         throw new Error('λ: Repeat last function call times should be the last parameter!');
       }
-    } else if (Array.isArray(arguments[1])) {
-      funcArgsSet.push(arguments[1]);
+    } else if (Array.isArray(arguments[c1])) {
+      funcArgsSet.push(arguments[c1]);
     } else {
       throw new TypeError('λ: 3rd, 4th, ... params can be either an array or a number!');
     }
