@@ -2,6 +2,9 @@ const BigNumber = require('bignumber.js');
 
 function λ() {
   const func = arguments[0];
+  const funcArgsSet = [];
+  let repeatLastFuncTimes = 1;
+  let c1;
 
   if (
     (func !== add) &&
@@ -10,6 +13,33 @@ function λ() {
     (func !== div)
   ) {
     throw new TypeError('λ: Illegal function passed as 1st param!');
+  }
+
+  if (Array.isArray(arguments[1]) === false) {
+    throw new TypeError('λ: 2nd param should be an array!');
+  }
+
+  funcArgsSet.push(arguments[1]);
+
+  c1 = 2;
+  while (typeof arguments[c1] !== 'undefined') {
+    if (typeof arguments[c1] === 'number') {
+      repeatLastFuncTimes = Math.floor(arguments[c1]);
+
+      if (Number.isNaN(repeatLastFuncTimes) === true || repeatLastFuncTimes <= 0) {
+        throw new Error('λ: Repeat last function call times should be a positive number!');
+      }
+
+      if (typeof arguments[c1 + 1] !== 'undefined') {
+        throw new Error('λ: Repeat last function call times should be the last parameter!');
+      }
+    } else if (Array.isArray(arguments[1])) {
+      funcArgsSet.push(arguments[1]);
+    } else {
+      throw new TypeError('λ: 3rd, 4th, ... params can be either an array or a number!');
+    }
+
+    c1 += 1;
   }
 
   return λ;
