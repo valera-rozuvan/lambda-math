@@ -67,19 +67,39 @@ function λ() {
     });
   });
 
-  funcArgsSet.forEach(function (args) {
-    if (args[0] === _) {
-      args[0] = _(CALL_ID);
+  funcArgsSet.forEach(function (args, idx) {
+    if (idx === funcArgsSet.length - 1 && repeatLastFuncTimes >= 2) {
+      return;
     }
 
-    if (args[1] === _) {
-      args[1] = _(CALL_ID);
-    }
+    args.forEach(function (arg, idx) {
+      if (args[idx] === _) {
+        args[idx] = resultsStore[CALL_ID];
+      }
+    });
 
     resultsStore[CALL_ID] = func(args[0], args[1]);
   });
 
+  if (repeatLastFuncTimes >= 2) {
+    const args = [];
+
+    for (c1 = 0; c1 < repeatLastFuncTimes; c1 += 1) {
+      args[0] = funcArgsSet[funcArgsSet.length - 1][0];
+      args[1] = funcArgsSet[funcArgsSet.length - 1][1];
+
+      args.forEach(function (arg, idx) {
+        if (args[idx] === _) {
+          args[idx] = resultsStore[CALL_ID];
+        }
+      });
+
+      resultsStore[CALL_ID] = func(args[0], args[1]);
+    }
+  }
+
   λ[λ_call_count] = resultsStore[CALL_ID];
+  λ[λ_call_count].number = resultsStore[CALL_ID].toNumber();
 
   return λ;
 }
@@ -89,12 +109,17 @@ function λ() {
 
   for (prop in resultsStore) {
     if (Object.prototype.hasOwnProperty.call(resultsStore, prop)) {
-      resultsStore.prop = undefined;
-      delete resultsStore.prop;
+      resultsStore[prop] = undefined;
+      delete resultsStore[prop];
     }
   }
 
-  λ_call_count = -1;
+  while (λ_call_count >= 0) {
+    λ[λ_call_count] = undefined;
+    delete λ[λ_call_count];
+
+    λ_call_count -= 1;
+  }
 };
 
 function _(callId) {

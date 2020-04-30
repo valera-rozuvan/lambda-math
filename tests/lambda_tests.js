@@ -409,12 +409,75 @@ describe('lambda', function () {
       λ( div, [6, 2], [_, 1] );
       expect(λ[0].toNumber()).to.equal(3);
     });
-  });
 
-  it('used in complex scenario should not throw', function () {
-    expect(function () {
+    it('0010', function () {
+      λ( div, [6, 2], [3, _] );
+      expect(λ[0].toNumber()).to.equal(1);
+    });
+
+    it('0010', function () {
+      λ( div, [6, 2], [3, _], [_, 2] );
+      expect(λ[0].toNumber()).to.equal(0.5);
+    });
+
+    it('0010', function () {
+      λ( div, [6, 2], [3, _], [4, _] );
+      expect(λ[0].toNumber()).to.equal(4);
+    });
+
+    /* ------------------------------------ */
+
+    it('0010', function () {
+      λ( div, [6, 2], 1 );
+      expect(λ[0].toNumber()).to.equal(3);
+    });
+
+    it('0010', function () {
+      λ( div, [6, 2], 2 );
+      expect(λ[0].toNumber()).to.equal(3);
+    });
+
+    it('0010', function () {
+      λ( div, [6, 2], 3 );
+      expect(λ[0].toNumber()).to.equal(3);
+    });
+
+    /* ------------------------------------ */
+
+    it('0010', function () {
+      λ( div, [48, 2], [_, 2], 1 );
+      expect(λ[0].toNumber()).to.equal(12);
+    });
+
+    it('0010', function () {
+      λ( div, [48, 2], [_, 2], 2 );
+      expect(λ[0].toNumber()).to.equal(6);
+    });
+
+    it('0010', function () {
+      λ( div, [48, 2], [_, 2], 3 );
+      expect(λ[0].toNumber()).to.equal(3);
+    });
+
+    it('0010', function () {
+      λ( div, [48, 2], [_, 2], 4 );
+      expect(λ[0].toNumber()).to.equal(1.5);
+    });
+
+    /* ------------------------------------ */
+
+    it('0011', function () {
       λ( div, [300, 293] )
        ( add, [λ[0], λ[0]], [_, λ[0]], 70 );
-    }).to.not.throw();
+
+      expect(λ[1].toNumber()).to.equal(73.72013651877133);
+    });
+
+    it('0012', function () {
+      λ( div, [300, 293] )
+       ( add, [λ[0], λ[0]], [_, λ[0]], 70 );
+
+      expect(λ[1].number).to.equal(73.72013651877133);
+    });
   });
 });
