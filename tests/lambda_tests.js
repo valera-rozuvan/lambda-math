@@ -479,5 +479,23 @@ describe('lambda', function () {
 
       expect(λ[1].number).to.equal(73.72013651877133);
     });
+
+    /* ------------------------------------ */
+
+    it('0023', function () {
+      λ( mul, [2, 3] )
+       ( mul, [5, 6] )
+       ( add, [λ[0], λ[1]] );
+
+      expect(λ[2].toNumber()).to.equal(36);
+    });
+
+    it('0024', function () {
+      λ( mul, [2, 3] )
+       ( mul, [5, 6] )
+       ( mul, [λ[0], λ[1]] );
+
+      expect(λ[2].toNumber()).to.equal(180);
+    });
   });
 });
