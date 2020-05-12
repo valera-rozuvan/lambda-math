@@ -1,5 +1,7 @@
 # Lambda math
 
+[![Build Status](https://travis-ci.org/valera-rozuvan/lambda-math.svg?branch=master)](https://travis-ci.org/valera-rozuvan/lambda-math)
+
 Pseudo lambda expressions for JS arbitrary-precision arithmetic operations.
 
 ## Example
