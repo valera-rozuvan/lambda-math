@@ -1,8 +1,15 @@
 # Lambda math
 
 [![Build Status](https://travis-ci.org/valera-rozuvan/lambda-math.svg?branch=master)](https://travis-ci.org/valera-rozuvan/lambda-math)
+[![npm version](https://badge.fury.io/js/lambda-math.svg)](https://badge.fury.io/js/lambda-math)
 
 Pseudo lambda expressions for JS arbitrary-precision arithmetic operations.
+
+## Install
+
+```
+npm install --save lambda-math
+```
 
 ## Example
 
@@ -33,7 +40,10 @@ Or, a more functional (fancy) JS approach:
 
 ```
 console.log(
-  Array.from(Array(72).keys()).map(() => { return 300 / 293; }).reduce((a, b) => { return a + b; })
+  Array
+    .from(Array(72).keys())
+    .map(() => { return 300 / 293; })
+    .reduce((a, b) => { return a + b; })
 ); // 73.72013651877126
 ```
 
@@ -42,3 +52,7 @@ As you can see, the pseudo lambda approach doesn't have the problem with roundin
 ## Internals
 
 Besides adding pseudo syntactic sugar, `lambda-math` uses [bignumber.js](https://www.npmjs.com/package/bignumber.js) under the hood for actual arbitrary-precision decimal arithmetic.
+
+## License
+
+See [LICENSE](LICENSE) for more details.
