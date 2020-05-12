@@ -54,10 +54,10 @@ As you can see, the pseudo lambda approach doesn't have the problem with roundin
 The library `lambda-math` exports the symbols `λ` and `Σ`, along with a number of mathematical functions. At the moment there are just 4 arithmetic functions available. Addition, subtraction, multiplication, and division:
 
 ```
-c = add(a, b) = a + b
-c = sub(a, b) = a - b
-c = mul(a, b) = a * b
-c = div(a, b) = a / b
+c = add(a, b) // same as: a + b
+c = sub(a, b) // same as: a - b
+c = mul(a, b) // same as: a * b
+c = div(a, b) // same as: a / b
 ```
 
 These 4 functions accept either JavaScript `number` or a `BigNumber` as parameters (can mix either way).
@@ -158,6 +158,8 @@ console.log(λ[0].number); // 3
 console.log(λ[1].number); // 7
 console.log(λ[2].number); // 11
 ```
+
+This is possible due to the fact that an invocation of `λ` returns an instance of itself ;)
 
 ## Internals
 
