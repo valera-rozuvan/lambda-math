@@ -1,14 +1,11 @@
 const BigNumber = require('bignumber.js');
 const expect = require('chai').expect;
 
-const λ = require('../src/index').λ;
+const λ = require('../src/lambda').λ;
 
-const add = require('../src/index').add;
-const sub = require('../src/index').sub;
-const mul = require('../src/index').mul;
-const div = require('../src/index').div;
+const { add, sub, mul, div } = require('../src/math');
 
-const _ = require('../src/index')._;
+const _ = require('../src/underscore')._;
 
 function test_func() {}
 

@@ -1,7 +1,7 @@
 const BigNumber = require('bignumber.js');
 const expect = require('chai').expect;
 
-const mul = require('../src/index').mul;
+const mul = require('../src/math').mul;
 
 describe('mul', function () {
   it('should be defined', function () {
