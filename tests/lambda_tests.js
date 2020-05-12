@@ -1,11 +1,9 @@
 const BigNumber = require('bignumber.js');
 const expect = require('chai').expect;
 
-const λ = require('../src/lambda').λ;
-
+const { λ } = require('../src/lambda');
+const { Σ } = require('../src/sigma');
 const { add, sub, mul, div } = require('../src/math');
-
-const _ = require('../src/underscore')._;
 
 function test_func() {}
 
@@ -28,8 +26,8 @@ describe('lambda', function () {
         expect(function () { λ(test_func); }).to.throw(TypeError, 'λ: Illegal function passed as 1st param!');
       });
 
-      it('should throw if called with underscore function as first param', function () {
-        expect(function () { λ(_); }).to.throw(TypeError, 'λ: Illegal function passed as 1st param!');
+      it('should throw if called with sigma function as first param', function () {
+        expect(function () { λ(Σ); }).to.throw(TypeError, 'λ: Illegal function passed as 1st param!');
       });
 
       describe('wrong types', function () {
@@ -407,22 +405,22 @@ describe('lambda', function () {
     /* ------------------------------------ */
 
     it('0010', function () {
-      λ( div, [6, 2], [_, 1] );
+      λ( div, [6, 2], [Σ, 1] );
       expect(λ[0].toNumber()).to.equal(3);
     });
 
     it('0011', function () {
-      λ( div, [6, 2], [3, _] );
+      λ( div, [6, 2], [3, Σ] );
       expect(λ[0].toNumber()).to.equal(1);
     });
 
     it('0012', function () {
-      λ( div, [6, 2], [3, _], [_, 2] );
+      λ( div, [6, 2], [3, Σ], [Σ, 2] );
       expect(λ[0].toNumber()).to.equal(0.5);
     });
 
     it('0013', function () {
-      λ( div, [6, 2], [3, _], [4, _] );
+      λ( div, [6, 2], [3, Σ], [4, Σ] );
       expect(λ[0].toNumber()).to.equal(4);
     });
 
@@ -446,22 +444,22 @@ describe('lambda', function () {
     /* ------------------------------------ */
 
     it('0017', function () {
-      λ( div, [48, 2], [_, 2], 1 );
+      λ( div, [48, 2], [Σ, 2], 1 );
       expect(λ[0].toNumber()).to.equal(12);
     });
 
     it('0018', function () {
-      λ( div, [48, 2], [_, 2], 2 );
+      λ( div, [48, 2], [Σ, 2], 2 );
       expect(λ[0].toNumber()).to.equal(6);
     });
 
     it('0019', function () {
-      λ( div, [48, 2], [_, 2], 3 );
+      λ( div, [48, 2], [Σ, 2], 3 );
       expect(λ[0].toNumber()).to.equal(3);
     });
 
     it('0020', function () {
-      λ( div, [48, 2], [_, 2], 4 );
+      λ( div, [48, 2], [Σ, 2], 4 );
       expect(λ[0].toNumber()).to.equal(1.5);
     });
 
@@ -469,14 +467,14 @@ describe('lambda', function () {
 
     it('0021', function () {
       λ( div, [300, 293] )
-       ( add, [λ[0], λ[0]], [_, λ[0]], 70 );
+       ( add, [λ[0], λ[0]], [Σ, λ[0]], 70 );
 
       expect(λ[1].toNumber()).to.equal(73.72013651877133);
     });
 
     it('0022', function () {
       λ( div, [300, 293] )
-       ( add, [λ[0], λ[0]], [_, λ[0]], 70 );
+       ( add, [λ[0], λ[0]], [Σ, λ[0]], 70 );
 
       expect(λ[1].number).to.equal(73.72013651877133);
     });

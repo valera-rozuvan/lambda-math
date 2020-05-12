@@ -1,6 +1,6 @@
 const BigNumber = require('bignumber.js');
 
-const { _ } = require('./underscore');
+const { Σ } = require('./sigma');
 const { add, sub, mul, div } = require('./math');
 
 let λ_call_count = -1;
@@ -62,9 +62,9 @@ function λ() {
     [args[0], args[1]].forEach((param) => {
       if (
         (typeof param === 'undefined' || param === null || Number.isNaN(param) === true) ||
-        (typeof param !== 'number' && param.constructor !== BigNumber && param !== _)
+        (typeof param !== 'number' && param.constructor !== BigNumber && param !== Σ)
       ) {
-        throw new TypeError(`Error! Array item must be a number, a BigNumber, or "_".`);
+        throw new TypeError(`Error! Array item must be a number, a BigNumber, or "Σ".`);
       }
     });
   });
@@ -75,7 +75,7 @@ function λ() {
     }
 
     args.forEach(function(arg, idx) {
-      if (args[idx] === _) {
+      if (args[idx] === Σ) {
         args[idx] = λ[λ_call_count];
       }
     });
@@ -91,7 +91,7 @@ function λ() {
       args[1] = funcArgsSet[funcArgsSet.length - 1][1];
 
       args.forEach(function(arg, idx) {
-        if (args[idx] === _) {
+        if (args[idx] === Σ) {
           args[idx] = λ[λ_call_count];
         }
       });
