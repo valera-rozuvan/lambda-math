@@ -49,7 +49,11 @@ console.log(
 
 As you can see, the pseudo lambda approach doesn't have the problem with rounding floating point numbers. Also, some (mathematicians) can argue that the syntax `lambda-math` introduces is more elegant, shorter, and cleaner overall (compared to pure JavaScript way of doing things).
 
-## API
+## Internals
+
+Besides adding pseudo syntactic sugar, `lambda-math` uses [bignumber.js](https://www.npmjs.com/package/bignumber.js) under the hood for actual arbitrary-precision decimal arithmetic.
+
+## Library API
 
 The library `lambda-math` exports the symbols `λ` and `Σ`, along with a number of mathematical functions. At the moment there are just 4 arithmetic functions available. Addition, subtraction, multiplication, and division:
 
@@ -135,7 +139,7 @@ console.log(c.toNumber()); // 17
 
 Besides using `λ` as a function, you can also access the results of each invocation of the function via the array index, starting from 0. So first invocation of `λ` will store the result as `λ[0]`, second invocation as `λ[1]`, and so on. For convenience, `λ[i].number` will contain the JavaScript `number` result value, and `λ[i]` will contain the `BigNumber` result value.
 
-For example:
+### Example 6
 
 ```
 λ(add, [1, 2]);
@@ -148,6 +152,8 @@ console.log(λ[2].number); // 11
 ```
 
 You can also chain any number of calls to `λ`, and this will not have any affect on your program:
+
+### Example 7
 
 ```
 λ(add, [1, 2])
@@ -163,7 +169,7 @@ This is possible due to the fact that an invocation of `λ` returns an instance 
 
 Last, but not least, `λ.reset()` is available to clear all `lambda-math` state, and reset the results stack to zero.
 
-Example:
+### Example 8
 
 ```
 λ(add, [1, 2])
@@ -190,10 +196,6 @@ console.log(λ[3]); // undefined
 console.log(λ[4]); // undefined
 console.log(λ[5]); // undefined
 ```
-
-## Internals
-
-Besides adding pseudo syntactic sugar, `lambda-math` uses [bignumber.js](https://www.npmjs.com/package/bignumber.js) under the hood for actual arbitrary-precision decimal arithmetic.
 
 ## Running tests
 
