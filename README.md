@@ -147,7 +147,7 @@ console.log(λ[1].number); // 7
 console.log(λ[2].number); // 11
 ```
 
-Lat, but not least, you can chain any number of calls to `λ`, and this will not have any affect on your program:
+Last, but not least, you can chain any number of calls to `λ`, and this will not have any affect on your program:
 
 ```
 λ(add, [1, 2])
