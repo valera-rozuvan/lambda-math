@@ -133,7 +133,7 @@ for (let i = 0; i < 10; i += 1) {
 console.log(c.toNumber()); // 17
 ```
 
-Besides using `λ` as a function, you can also access the results of each invocation of the function via the array index, starting from 0. So first invocation of `λ` will store the result as `λ[0]`, second invocation as `λ[1]`, and so on. For convenience, `λ[i].number` will have the JavaScript `number` value, and `λ[i]` will be the `BigNumber` result value.
+Besides using `λ` as a function, you can also access the results of each invocation of the function via the array index, starting from 0. So first invocation of `λ` will store the result as `λ[0]`, second invocation as `λ[1]`, and so on. For convenience, `λ[i].number` will contain the JavaScript `number` result value, and `λ[i]` will contain the `BigNumber` result value.
 
 For example:
 
