@@ -25,5 +25,13 @@
   },
   "dependencies": {
     "bignumber.js": "^9.0.0"
-  }
+  },
+  "files": [
+    "src/",
+    ".gitignore",
+    "LICENSE",
+    "README.md",
+    "package-lock.json",
+    "package.json"
+  ]
 }
