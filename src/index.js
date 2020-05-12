@@ -181,11 +181,4 @@ function div(x, y) {
   return x.div(y);
 }
 
-module.exports = {
-  λ: λ,
-  _: _,
-  add: add,
-  sub: sub,
-  mul: mul,
-  div: div
-};
+module.exports = { λ, _, add, sub, mul, div };
