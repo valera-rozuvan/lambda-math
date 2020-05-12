@@ -147,7 +147,7 @@ console.log(λ[1].number); // 7
 console.log(λ[2].number); // 11
 ```
 
-Last, but not least, you can chain any number of calls to `λ`, and this will not have any affect on your program:
+You can also chain any number of calls to `λ`, and this will not have any affect on your program:
 
 ```
 λ(add, [1, 2])
@@ -160,6 +160,36 @@ console.log(λ[2].number); // 11
 ```
 
 This is possible due to the fact that an invocation of `λ` returns an instance of itself ;)
+
+Last, but not least, `λ.reset()` is available to clear all `lambda-math` state, and reset the results stack to zero.
+
+Example:
+
+```
+λ(add, [1, 2])
+ (add, [3, 4])
+ (add, [5, 6]);
+
+console.log(λ[0].number); // 3
+console.log(λ[1].number); // 7
+console.log(λ[2].number); // 11
+console.log(λ[3]); // undefined
+console.log(λ[4]); // undefined
+console.log(λ[5]); // undefined
+
+λ.reset();
+
+λ(add, [10, 20])
+ (add, [30, 40])
+ (add, [50, 60]);
+
+console.log(λ[0].number); // 30
+console.log(λ[1].number); // 70
+console.log(λ[2].number); // 110
+console.log(λ[3]); // undefined
+console.log(λ[4]); // undefined
+console.log(λ[5]); // undefined
+```
 
 ## Internals
 
