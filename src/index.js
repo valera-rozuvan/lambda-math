@@ -122,9 +122,7 @@ function λ() {
   }
 };
 
-function _(callId) {
-  return resultsStore[callId];
-}
+function _() { }
 
 function verifyFuncParams(funcName, x, y) {
   [x, y].forEach((param, idx) => {
