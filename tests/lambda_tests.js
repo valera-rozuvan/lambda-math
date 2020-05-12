@@ -31,6 +31,10 @@ describe('lambda', function () {
         expect(function () { λ(test_func); }).to.throw(TypeError, 'λ: Illegal function passed as 1st param!');
       });
 
+      it('should throw if called with underscore function as first param', function () {
+        expect(function () { λ(_); }).to.throw(TypeError, 'λ: Illegal function passed as 1st param!');
+      });
+
       describe('wrong types', function () {
         it('should throw if first param is "string"', function () {
           expect(function () { λ('test', []); }).to.throw(TypeError, 'λ: 1st param should be a function!');

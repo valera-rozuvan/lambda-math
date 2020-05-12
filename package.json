@@ -24,7 +24,6 @@
     "mocha": "^7.1.2"
   },
   "dependencies": {
-    "bignumber.js": "^9.0.0",
-    "uuid": "^8.0.0"
+    "bignumber.js": "^9.0.0"
   }
 }

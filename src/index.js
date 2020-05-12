@@ -1,7 +1,5 @@
-const uuidv4 = require('uuid').v4;
 const BigNumber = require('bignumber.js');
 
-const resultsStore = {};
 let λ_call_count = -1;
 
 function λ() {
@@ -10,11 +8,12 @@ function λ() {
   let repeatLastFuncTimes = 1;
   let c1;
 
-  const CALL_ID = uuidv4();
-  resultsStore[CALL_ID] = 0;
-
   λ_call_count += 1;
   λ[λ_call_count] = new BigNumber(0);
+
+  if (typeof func === 'undefined' || func === undefined) {
+    throw new TypeError('λ: 1st param should be a function!');
+  }
 
   if (!(func instanceof Function)) {
     throw new TypeError('λ: 1st param should be a function!');
@@ -74,11 +73,11 @@ function λ() {
 
     args.forEach(function (arg, idx) {
       if (args[idx] === _) {
-        args[idx] = resultsStore[CALL_ID];
+        args[idx] = λ[λ_call_count];
       }
     });
 
-    resultsStore[CALL_ID] = func(args[0], args[1]);
+    λ[λ_call_count] = func(args[0], args[1]);
   });
 
   if (repeatLastFuncTimes >= 2) {
@@ -90,30 +89,20 @@ function λ() {
 
       args.forEach(function (arg, idx) {
         if (args[idx] === _) {
-          args[idx] = resultsStore[CALL_ID];
+          args[idx] = λ[λ_call_count];
         }
       });
 
-      resultsStore[CALL_ID] = func(args[0], args[1]);
+      λ[λ_call_count] = func(args[0], args[1]);
     }
   }
 
-  λ[λ_call_count] = resultsStore[CALL_ID];
-  λ[λ_call_count].number = resultsStore[CALL_ID].toNumber();
+  λ[λ_call_count].number = λ[λ_call_count].toNumber();
 
   return λ;
 }
 
 λ.reset = function () {
-  let prop;
-
-  for (prop in resultsStore) {
-    if (Object.prototype.hasOwnProperty.call(resultsStore, prop)) {
-      resultsStore[prop] = undefined;
-      delete resultsStore[prop];
-    }
-  }
-
   while (λ_call_count >= 0) {
     λ[λ_call_count] = undefined;
     delete λ[λ_call_count];
