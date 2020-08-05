@@ -11,7 +11,7 @@
     "url": "git+https://github.com/valera-rozuvan/lambda-math.git"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "author": "Valera Rozuvan",
   "license": "MIT",
