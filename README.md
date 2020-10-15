@@ -221,4 +221,4 @@ You can use ESLint to check for potential problems in source code by running `np
 
 ## License
 
-See [LICENSE](LICENSE) for more details.
+MIT License. See [LICENSE](LICENSE) for more details.
