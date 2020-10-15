@@ -357,8 +357,44 @@ describe('lambda', function () {
       expect(λ[0].string).to.equal('3');
     });
 
+    it('0001.1', function () {
+      λ( div, ['6', 2] );
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
+    });
+
+    it('0001.2', function () {
+      λ( div, [6, '2'] );
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
+    });
+
     it('0002', function () {
       λ( div, [6, 2], [10, 5] );
+      expect(λ[0].number).to.equal(2);
+      expect(λ[0].string).to.equal('2');
+    });
+
+    it('0002.1', function () {
+      λ( div, ['6', 2], [10, 5] );
+      expect(λ[0].number).to.equal(2);
+      expect(λ[0].string).to.equal('2');
+    });
+
+    it('0002.2', function () {
+      λ( div, [6, '2'], [10, 5] );
+      expect(λ[0].number).to.equal(2);
+      expect(λ[0].string).to.equal('2');
+    });
+
+    it('0002.3', function () {
+      λ( div, [6, 2], ['10', 5] );
+      expect(λ[0].number).to.equal(2);
+      expect(λ[0].string).to.equal('2');
+    });
+
+    it('0002.4', function () {
+      λ( div, [6, 2], [10, '5'] );
       expect(λ[0].number).to.equal(2);
       expect(λ[0].string).to.equal('2');
     });
@@ -419,8 +455,44 @@ describe('lambda', function () {
       expect(λ[0].string).to.equal('3');
     });
 
+    it('0010.1', function () {
+      λ( div, ['6', 2], [Σ, 1] );
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
+    });
+
+    it('0010.2', function () {
+      λ( div, [6, '2'], [Σ, 1] );
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
+    });
+
+    it('0010.3', function () {
+      λ( div, [6, 2], [Σ, '1'] );
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
+    });
+
     it('0011', function () {
       λ( div, [6, 2], [3, Σ] );
+      expect(λ[0].number).to.equal(1);
+      expect(λ[0].string).to.equal('1');
+    });
+
+    it('0011.1', function () {
+      λ( div, ['6', 2], [3, Σ] );
+      expect(λ[0].number).to.equal(1);
+      expect(λ[0].string).to.equal('1');
+    });
+
+    it('0011.2', function () {
+      λ( div, [6, '2'], [3, Σ] );
+      expect(λ[0].number).to.equal(1);
+      expect(λ[0].string).to.equal('1');
+    });
+
+    it('0011.3', function () {
+      λ( div, [6, 2], ['3', Σ] );
       expect(λ[0].number).to.equal(1);
       expect(λ[0].string).to.equal('1');
     });
@@ -431,8 +503,56 @@ describe('lambda', function () {
       expect(λ[0].string).to.equal('0.5');
     });
 
+    it('0012.1', function () {
+      λ( div, ['6', 2], [3, Σ], [Σ, 2] );
+      expect(λ[0].number).to.equal(0.5);
+      expect(λ[0].string).to.equal('0.5');
+    });
+
+    it('0012.2', function () {
+      λ( div, [6, '2'], [3, Σ], [Σ, 2] );
+      expect(λ[0].number).to.equal(0.5);
+      expect(λ[0].string).to.equal('0.5');
+    });
+
+    it('0012.3', function () {
+      λ( div, [6, 2], ['3', Σ], [Σ, 2] );
+      expect(λ[0].number).to.equal(0.5);
+      expect(λ[0].string).to.equal('0.5');
+    });
+
+    it('0012.4', function () {
+      λ( div, [6, 2], [3, Σ], [Σ, '2'] );
+      expect(λ[0].number).to.equal(0.5);
+      expect(λ[0].string).to.equal('0.5');
+    });
+
     it('0013', function () {
       λ( div, [6, 2], [3, Σ], [4, Σ] );
+      expect(λ[0].number).to.equal(4);
+      expect(λ[0].string).to.equal('4');
+    });
+
+    it('0013.1', function () {
+      λ( div, ['6', 2], [3, Σ], [4, Σ] );
+      expect(λ[0].number).to.equal(4);
+      expect(λ[0].string).to.equal('4');
+    });
+
+    it('0013.2', function () {
+      λ( div, [6, '2'], [3, Σ], [4, Σ] );
+      expect(λ[0].number).to.equal(4);
+      expect(λ[0].string).to.equal('4');
+    });
+
+    it('0013.3', function () {
+      λ( div, [6, 2], ['3', Σ], [4, Σ] );
+      expect(λ[0].number).to.equal(4);
+      expect(λ[0].string).to.equal('4');
+    });
+
+    it('0013.4', function () {
+      λ( div, [6, 2], [3, Σ], ['4', Σ] );
       expect(λ[0].number).to.equal(4);
       expect(λ[0].string).to.equal('4');
     });
@@ -506,6 +626,42 @@ describe('lambda', function () {
     it('0023', function () {
       λ( mul, [2, 3] )
        ( mul, [5, 6] )
+       ( add, [λ[0], λ[1]] );
+
+      expect(λ[2].number).to.equal(36);
+      expect(λ[2].string).to.equal('36');
+    });
+
+    it('0023.1', function () {
+      λ( mul, ['2', 3] )
+       ( mul, [5, 6] )
+       ( add, [λ[0], λ[1]] );
+
+      expect(λ[2].number).to.equal(36);
+      expect(λ[2].string).to.equal('36');
+    });
+
+    it('0023.2', function () {
+      λ( mul, [2, '3'] )
+       ( mul, [5, 6] )
+       ( add, [λ[0], λ[1]] );
+
+      expect(λ[2].number).to.equal(36);
+      expect(λ[2].string).to.equal('36');
+    });
+
+    it('0023.3', function () {
+      λ( mul, [2, 3] )
+       ( mul, ['5', 6] )
+       ( add, [λ[0], λ[1]] );
+
+      expect(λ[2].number).to.equal(36);
+      expect(λ[2].string).to.equal('36');
+    });
+
+    it('0023.4', function () {
+      λ( mul, [2, 3] )
+       ( mul, [5, '6'] )
        ( add, [λ[0], λ[1]] );
 
       expect(λ[2].number).to.equal(36);

@@ -4,21 +4,21 @@ function verifyFuncParams(funcName, x, y) {
   [x, y].forEach((param, idx) => {
     if (
       (typeof param === 'undefined' || param === null || Number.isNaN(param) === true) ||
-      (typeof param !== 'number' && param.constructor !== BigNumber)
+      (typeof param !== 'string' && typeof param !== 'number' && param.constructor !== BigNumber)
     ) {
       const paramName = (idx === 0) ? 'First' : 'Second';
 
-      throw new TypeError(`${funcName}: Error! ${paramName} param must be a number or a BigNumber.`);
+      throw new TypeError(`${funcName}: Error! ${paramName} param must be a number, a string, or a BigNumber.`);
     }
   });
 }
 
 function convertFuncParams(x, y) {
-  if (typeof x === 'number') {
+  if (typeof x === 'number' || typeof x === 'string') {
     x = new BigNumber(x);
   }
 
-  if (typeof y === 'number') {
+  if (typeof y === 'number' || typeof y === 'string') {
     y = new BigNumber(y);
   }
 

@@ -64,7 +64,7 @@ c = mul(a, b) // same as: a * b
 c = div(a, b) // same as: a / b
 ```
 
-These 4 functions accept either JavaScript `number` or a `BigNumber` as parameters (can mix either way).
+These 4 functions accept either JavaScript `number`, `string`, or a `BigNumber` as parameters (can mix either way).
 
 While you can use these functions directly, what you want to do is use them via the `λ` function. The `λ` function expects several parameters. The first parameter is the math function to be applied. It can be one of the above 4 functions. The 2nd, 3rd, etc. params must be arrays containing the numbers that will be passed to each subsequent call of the math function.
 

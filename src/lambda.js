@@ -62,9 +62,9 @@ function λ(...args) {
     [args[0], args[1]].forEach((param) => {
       if (
         (typeof param === 'undefined' || param === null || Number.isNaN(param) === true) ||
-        (typeof param !== 'number' && param.constructor !== BigNumber && param !== Σ)
+        (typeof param !== 'string' && typeof param !== 'number' && param.constructor !== BigNumber && param !== Σ)
       ) {
-        throw new TypeError(`Error! Array item must be a number, a BigNumber, or "Σ".`);
+        throw new TypeError(`Error! Array item must be a number, a string, a BigNumber, or "Σ".`);
       }
     });
   });
