@@ -1,0 +1,27 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {}
+  },
+  "env": {
+    "node": true
+  },
+  "extends": ["eslint:recommended", "google"],
+  "rules": {
+    "require-jsdoc": "off",
+    "max-len": [
+      "error", {
+        "code": 120
+      }
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always",
+      {
+        "arraysInObjects": false,
+        "objectsInObjects": false
+      }
+    ]
+  }
+}

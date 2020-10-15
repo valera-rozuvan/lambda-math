@@ -3,7 +3,7 @@ const { verifyFuncParams, convertFuncParams } = require('./utils');
 function add(x, y) {
   verifyFuncParams('add', x, y);
 
-  ({x, y} = convertFuncParams(x, y));
+  ({ x, y } = convertFuncParams(x, y));
 
   return x.plus(y);
 }
@@ -11,7 +11,7 @@ function add(x, y) {
 function sub(x, y) {
   verifyFuncParams('sub', x, y);
 
-  ({x, y} = convertFuncParams(x, y));
+  ({ x, y } = convertFuncParams(x, y));
 
   return x.minus(y);
 }
@@ -19,7 +19,7 @@ function sub(x, y) {
 function mul(x, y) {
   verifyFuncParams('mul', x, y);
 
-  ({x, y} = convertFuncParams(x, y));
+  ({ x, y } = convertFuncParams(x, y));
 
   return x.times(y);
 }
@@ -27,7 +27,7 @@ function mul(x, y) {
 function div(x, y) {
   verifyFuncParams('div', x, y);
 
-  ({x, y} = convertFuncParams(x, y));
+  ({ x, y } = convertFuncParams(x, y));
 
   return x.div(y);
 }

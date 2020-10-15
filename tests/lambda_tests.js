@@ -353,114 +353,134 @@ describe('lambda', function () {
   describe('arithmetics tests', function () {
     it('0001', function () {
       λ( div, [6, 2] );
-      expect(λ[0].toNumber()).to.equal(3);
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
     });
 
     it('0002', function () {
       λ( div, [6, 2], [10, 5] );
-      expect(λ[0].toNumber()).to.equal(2);
+      expect(λ[0].number).to.equal(2);
+      expect(λ[0].string).to.equal('2');
     });
 
     it('0003', function () {
       λ( div, [6, 2], [10, 5], [12, 3] );
-      expect(λ[0].toNumber()).to.equal(4);
+      expect(λ[0].number).to.equal(4);
+      expect(λ[0].string).to.equal('4');
     });
 
     it('0004', function () {
       λ( div, [6, 2] );
       λ( div, [6, 2] );
-      expect(λ[0].toNumber()).to.equal(3);
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
     });
 
     it('0005', function () {
       λ( div, [6, 2], [10, 5] );
       λ( div, [6, 2], [10, 5] );
-      expect(λ[0].toNumber()).to.equal(2);
+      expect(λ[0].number).to.equal(2);
+      expect(λ[0].string).to.equal('2');
     });
 
     it('0006', function () {
       λ( div, [6, 2], [10, 5], [12, 3] );
       λ( div, [6, 2], [10, 5], [12, 3] );
-      expect(λ[0].toNumber()).to.equal(4);
+      expect(λ[0].number).to.equal(4);
+      expect(λ[0].string).to.equal('4');
     });
 
     it('0007', function () {
       λ( div, [6, 2] );
       λ( div, [21, 3] );
-      expect(λ[1].toNumber()).to.equal(7);
+      expect(λ[1].number).to.equal(7);
+      expect(λ[1].string).to.equal('7');
     });
 
     it('0008', function () {
       λ( div, [6, 2], [10, 5] );
       λ( div, [21, 3], [90, 10] );
-      expect(λ[1].toNumber()).to.equal(9);
+      expect(λ[1].number).to.equal(9);
+      expect(λ[1].string).to.equal('9');
     });
 
     it('0009', function () {
       λ( div, [6, 2], [10, 5], [12, 3] );
       λ( div, [21, 3], [90, 10], [20, 2] );
-      expect(λ[1].toNumber()).to.equal(10);
+      expect(λ[1].number).to.equal(10);
+      expect(λ[1].string).to.equal('10');
     });
 
     /* ------------------------------------ */
 
     it('0010', function () {
       λ( div, [6, 2], [Σ, 1] );
-      expect(λ[0].toNumber()).to.equal(3);
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
     });
 
     it('0011', function () {
       λ( div, [6, 2], [3, Σ] );
-      expect(λ[0].toNumber()).to.equal(1);
+      expect(λ[0].number).to.equal(1);
+      expect(λ[0].string).to.equal('1');
     });
 
     it('0012', function () {
       λ( div, [6, 2], [3, Σ], [Σ, 2] );
-      expect(λ[0].toNumber()).to.equal(0.5);
+      expect(λ[0].number).to.equal(0.5);
+      expect(λ[0].string).to.equal('0.5');
     });
 
     it('0013', function () {
       λ( div, [6, 2], [3, Σ], [4, Σ] );
-      expect(λ[0].toNumber()).to.equal(4);
+      expect(λ[0].number).to.equal(4);
+      expect(λ[0].string).to.equal('4');
     });
 
     /* ------------------------------------ */
 
     it('0014', function () {
       λ( div, [6, 2], 1 );
-      expect(λ[0].toNumber()).to.equal(3);
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
     });
 
     it('0015', function () {
       λ( div, [6, 2], 2 );
-      expect(λ[0].toNumber()).to.equal(3);
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
     });
 
     it('0016', function () {
       λ( div, [6, 2], 3 );
-      expect(λ[0].toNumber()).to.equal(3);
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
     });
 
     /* ------------------------------------ */
 
     it('0017', function () {
       λ( div, [48, 2], [Σ, 2], 1 );
-      expect(λ[0].toNumber()).to.equal(12);
+      expect(λ[0].number).to.equal(12);
+      expect(λ[0].string).to.equal('12');
     });
 
     it('0018', function () {
       λ( div, [48, 2], [Σ, 2], 2 );
-      expect(λ[0].toNumber()).to.equal(6);
+      expect(λ[0].number).to.equal(6);
+      expect(λ[0].string).to.equal('6');
     });
 
     it('0019', function () {
       λ( div, [48, 2], [Σ, 2], 3 );
-      expect(λ[0].toNumber()).to.equal(3);
+      expect(λ[0].number).to.equal(3);
+      expect(λ[0].string).to.equal('3');
     });
 
     it('0020', function () {
       λ( div, [48, 2], [Σ, 2], 4 );
-      expect(λ[0].toNumber()).to.equal(1.5);
+      expect(λ[0].number).to.equal(1.5);
+      expect(λ[0].string).to.equal('1.5');
     });
 
     /* ------------------------------------ */
@@ -469,7 +489,8 @@ describe('lambda', function () {
       λ( div, [300, 293] )
        ( add, [λ[0], λ[0]], [Σ, λ[0]], 70 );
 
-      expect(λ[1].toNumber()).to.equal(73.72013651877133);
+      expect(λ[1].number).to.equal(73.72013651877133);
+      expect(λ[1].string).to.equal('73.72013651877133105776');
     });
 
     it('0022', function () {
@@ -477,6 +498,7 @@ describe('lambda', function () {
        ( add, [λ[0], λ[0]], [Σ, λ[0]], 70 );
 
       expect(λ[1].number).to.equal(73.72013651877133);
+      expect(λ[1].string).to.equal('73.72013651877133105776');
     });
 
     /* ------------------------------------ */
@@ -486,7 +508,8 @@ describe('lambda', function () {
        ( mul, [5, 6] )
        ( add, [λ[0], λ[1]] );
 
-      expect(λ[2].toNumber()).to.equal(36);
+      expect(λ[2].number).to.equal(36);
+      expect(λ[2].string).to.equal('36');
     });
 
     it('0024', function () {
@@ -494,7 +517,8 @@ describe('lambda', function () {
        ( mul, [5, 6] )
        ( mul, [λ[0], λ[1]] );
 
-      expect(λ[2].toNumber()).to.equal(180);
+      expect(λ[2].number).to.equal(180);
+      expect(λ[2].string).to.equal('180');
     });
   });
 });

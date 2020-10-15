@@ -3,16 +3,16 @@ const BigNumber = require('bignumber.js');
 const { Σ } = require('./sigma');
 const { add, sub, mul, div } = require('./math');
 
-let λ_call_count = -1;
+let λCallCount = -1;
 
-function λ() {
-  const func = arguments[0];
+function λ(...args) {
+  const func = args[0];
   const funcArgsSet = [];
   let repeatLastFuncTimes = 1;
   let c1;
 
-  λ_call_count += 1;
-  λ[λ_call_count] = new BigNumber(0);
+  λCallCount += 1;
+  λ[λCallCount] = new BigNumber(0);
 
   if (typeof func === 'undefined' || func === undefined) {
     throw new TypeError('λ: 1st param should be a function!');
@@ -31,26 +31,26 @@ function λ() {
     throw new TypeError('λ: Illegal function passed as 1st param!');
   }
 
-  if (Array.isArray(arguments[1]) === false) {
+  if (Array.isArray(args[1]) === false) {
     throw new TypeError('λ: 2nd param should be an array!');
   }
 
-  funcArgsSet.push(arguments[1]);
+  funcArgsSet.push(args[1]);
 
   c1 = 2;
-  while (typeof arguments[c1] !== 'undefined') {
-    if (typeof arguments[c1] === 'number') {
-      repeatLastFuncTimes = Math.floor(arguments[c1]);
+  while (typeof args[c1] !== 'undefined') {
+    if (typeof args[c1] === 'number') {
+      repeatLastFuncTimes = Math.floor(args[c1]);
 
       if (Number.isNaN(repeatLastFuncTimes) || repeatLastFuncTimes <= 0) {
         throw new Error('λ: Repeat last function call times should be a positive number!');
       }
 
-      if (typeof arguments[c1 + 1] !== 'undefined') {
+      if (typeof args[c1 + 1] !== 'undefined') {
         throw new Error('λ: Repeat last function call times should be the last parameter!');
       }
-    } else if (Array.isArray(arguments[c1])) {
-      funcArgsSet.push(arguments[c1]);
+    } else if (Array.isArray(args[c1])) {
+      funcArgsSet.push(args[c1]);
     } else {
       throw new TypeError('λ: 3rd, 4th, ... params can be either an array or a number!');
     }
@@ -76,11 +76,11 @@ function λ() {
 
     args.forEach(function(arg, idx) {
       if (args[idx] === Σ) {
-        args[idx] = λ[λ_call_count];
+        args[idx] = λ[λCallCount];
       }
     });
 
-    λ[λ_call_count] = func(args[0], args[1]);
+    λ[λCallCount] = func(args[0], args[1]);
   });
 
   if (repeatLastFuncTimes >= 2) {
@@ -92,25 +92,26 @@ function λ() {
 
       args.forEach(function(arg, idx) {
         if (args[idx] === Σ) {
-          args[idx] = λ[λ_call_count];
+          args[idx] = λ[λCallCount];
         }
       });
 
-      λ[λ_call_count] = func(args[0], args[1]);
+      λ[λCallCount] = func(args[0], args[1]);
     }
   }
 
-  λ[λ_call_count].number = λ[λ_call_count].toNumber();
+  λ[λCallCount].number = λ[λCallCount].toNumber();
+  λ[λCallCount].string = λ[λCallCount].toString(10);
 
   return λ;
 }
 
 λ.reset = function() {
-  while (λ_call_count >= 0) {
-    λ[λ_call_count] = undefined;
-    delete λ[λ_call_count];
+  while (λCallCount >= 0) {
+    λ[λCallCount] = undefined;
+    delete λ[λCallCount];
 
-    λ_call_count -= 1;
+    λCallCount -= 1;
   }
 };
 
