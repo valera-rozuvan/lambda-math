@@ -13,18 +13,9 @@ npm install --save lambda-math
 
 ## Example
 
-Consider adding the floating point number `300 / 293` many times. 72 times in fact. Now, we don't want to simply multiply a number by 72. We want to add it 72 times, so that we can clearly see the problem with floating point rounding which exists in standard JavaScript. So, using `lambda-math` library, we can write:
+Consider adding the floating point number `300 / 293` many times. 72 times in fact. Now, we don't want to simply multiply a number by 72. We want to add it 72 times. This way, we can clearly see the problem with floating point number rounding which exists in standard JavaScript.
 
-```
-const { div, add, λ, Σ } = require('lambda-math');
-
-λ( div, [300, 293] )
- ( add, [λ[0], λ[0]], [Σ, λ[0]], 70 );
-
-console.log(λ[1].number); // 73.72013651877133
-```
-
-Compare the above to the simple JavaScript way of doing such a sum:
+The simple JavaScript way of doing such a sum:
 
 ```
 let result = 0;
@@ -45,6 +36,25 @@ console.log(
     .map(() => { return 300 / 293; })
     .reduce((a, b) => { return a + b; })
 ); // 73.72013651877126
+```
+
+You may have noticed that both approaches produce exactly the same output: `73.72013651877126`. If you go and use some cool mathematical environment to actually perform this arithmetic, you will see that the output is something like: `73.7201365187713310580204778156996587...`. Comparing the JS output and mathematical output, we can see that the last 2 digits are wrong in the JS version:
+
+```
+JS:   73.72...77126
+Math: 73.72...77133
+```
+
+Can we do any better? Using `lambda-math` library, we can write:
+
+```
+const { div, add, λ, Σ } = require('lambda-math');
+
+λ( div, [300, 293] )
+ ( add, [λ[0], λ[0]], [Σ, λ[0]], 70 );
+
+console.log(λ[1].number); // 73.72013651877133
+console.log(λ[1].string); // '73.72013651877133105776'
 ```
 
 As you can see, the pseudo lambda approach doesn't have the problem with rounding floating point numbers. Also, some (mathematicians) can argue that the syntax `lambda-math` introduces is more elegant, shorter, and cleaner overall (compared to pure JavaScript way of doing things).
@@ -72,7 +82,7 @@ Optionally, you can pass to `λ` a simple JavaScript number as the last param. I
 
 Additionally, besides numbers, any of the parameter arrays can contain the symbol `Σ`. You can use the symbol `Σ` to tell `lambda-math` to substitute the result of the last operation as a param to a math function call. You should think of this as a `variable`.
 
-Some examples to better demonstrate these concepts:
+Some examples follow below to better demonstrate these concepts.
 
 ### Example 1
 
@@ -137,9 +147,9 @@ for (let i = 0; i < 10; i += 1) {
 console.log(c.toNumber()); // 17
 ```
 
-Besides using `λ` as a function, you can also access the results of each invocation of the function via the array index, starting from 0. So first invocation of `λ` will store the result as `λ[0]`, second invocation as `λ[1]`, and so on. For convenience, `λ[i].number` will contain the JavaScript `number` result value, `λ[i].string` will contain the JavaScript `string` result value, and `λ[i]` will contain the `BigNumber` result value.
-
 ### Example 6
+
+Besides using `λ` as a function, you can also access the results of each invocation of the function via the array index, starting from 0. So first invocation of `λ` will store the result as `λ[0]`, second invocation as `λ[1]`, and so on. For convenience, `λ[i].number` will contain the JavaScript `number` result value, `λ[i].string` will contain the JavaScript `string` result value, and `λ[i]` will contain the `BigNumber` result value.
 
 ```
 λ(add, [1, 2]);
@@ -155,9 +165,9 @@ console.log(λ[1].string); // '7'
 console.log(λ[2].string); // '11'
 ```
 
-You can also chain any number of calls to `λ`, and this will not have any affect on your program:
-
 ### Example 7
+
+You can also chain any number of calls to `λ`, and this will not have any affect on your program:
 
 ```
 λ(add, [1, 2])
@@ -171,9 +181,9 @@ console.log(λ[2].number); // 11
 
 This is possible due to the fact that an invocation of `λ` returns an instance of itself ;)
 
-Last, but not least, `λ.reset()` is available to clear all `lambda-math` state, and reset the results stack to zero.
-
 ### Example 8
+
+Last, but not least, `λ.reset()` is available to clear all `lambda-math` state, and reset the results stack to zero.
 
 ```
 λ(add, [1, 2])
@@ -204,6 +214,10 @@ console.log(λ[5]); // undefined
 ## Running tests
 
 Clone this repo, do `npm install`, followed by `npm run test`.
+
+## Lint the source code
+
+You can use ESLint to check for potential problems in source code by running `npm run lint`.
 
 ## License
 
