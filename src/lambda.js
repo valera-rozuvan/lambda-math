@@ -2,6 +2,7 @@ const BigNumber = require('bignumber.js');
 
 const { Σ } = require('./sigma');
 const { add, sub, mul, div } = require('./math');
+const { isInteger } = require('./utils');
 
 let λCallCount = -1;
 
@@ -115,4 +116,28 @@ function λ(...args) {
   }
 };
 
-module.exports = { λ };
+function Ω(idx) {
+  if (typeof idx === 'undefined') {
+    return λCallCount + 1;
+  } else if (typeof idx === 'number') {
+    if (idx === 0) {
+      throw new Error('Parameter to Ω() can not be 0.');
+    }
+
+    if (!isInteger(idx)) {
+      throw new Error('Parameter to Ω() must be an integer.');
+    }
+
+    if ((idx < 0) && (Math.abs(idx) <= λCallCount + 1)) {
+      return λ[Math.abs(idx) - 1];
+    } else if ((idx > 0) && (idx <= λCallCount + 1)) {
+      return λ[λCallCount - (idx - 1)];
+    } else {
+      throw new Error('Parameter to Ω() is out of bounds.');
+    }
+  } else {
+    throw new TypeError('Parameter to Ω() should be either a number or undefined.');
+  }
+}
+
+module.exports = { λ, Ω };

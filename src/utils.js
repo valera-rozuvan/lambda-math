@@ -25,4 +25,8 @@ function convertFuncParams(x, y) {
   return { x, y };
 }
 
-module.exports = { verifyFuncParams, convertFuncParams };
+function isInteger(n) {
+  return n % 1 === 0;
+}
+
+module.exports = { verifyFuncParams, convertFuncParams, isInteger };

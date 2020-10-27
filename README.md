@@ -65,7 +65,7 @@ Besides adding pseudo syntactic sugar, `lambda-math` uses [bignumber.js](https:/
 
 ## Library API
 
-The library `lambda-math` exports the symbols `λ` and `Σ`, along with a number of mathematical functions. At the moment there are just 4 arithmetic functions available. Addition, subtraction, multiplication, and division:
+The library `lambda-math` exports the symbols `λ`, `Ω`, and `Σ`, along with a number of mathematical functions. At the moment there are just 4 arithmetic functions available. Addition, subtraction, multiplication, and division:
 
 ```
 c = add(a, b) // same as: a + b
@@ -81,6 +81,8 @@ While you can use these functions directly, what you want to do is use them via 
 Optionally, you can pass to `λ` a simple JavaScript number as the last param. It will indicate how many times the last math function needs to be called with the last set of params. You should think of this as a `for loop`.
 
 Additionally, besides numbers, any of the parameter arrays can contain the symbol `Σ`. You can use the symbol `Σ` to tell `lambda-math` to substitute the result of the last operation as a param to a math function call. You should think of this as a `variable`.
+
+The function `Ω` can be used to easily index any of the results produced by the `λ` function. This is helpful when the number of invocation of `λ` is dynamic and you don't want to keep track of the index of last result.
 
 Some examples follow below to better demonstrate these concepts.
 
@@ -182,6 +184,55 @@ console.log(λ[2].number); // 11
 This is possible due to the fact that an invocation of `λ` returns an instance of itself ;)
 
 ### Example 8
+
+If you want to quickly reference some of the latest `λ` results, but don't want to store the invocation number in a variable, `lambda-math` provides the `Ω` function. This function has two goals.
+
+Firstly, if you call it without any parameter, it will return the number of times `λ` has been called up to this point. I.e. the number of results available. For example:
+
+```
+λ(add, [1, 2])
+ (add, [3, 4])
+ (add, [5, 6])
+ (add, [7, 8]);
+
+console.log(Ω()); // 4
+```
+
+Secondly, if you pass an integer, you will get the `Nth` result from the start or from the end, depending on the sign of the integer passed. For example:
+
+```
+λ( add, [1, 2] )
+ ( add, [3, 4] )
+ ( add, [5, 6] )
+ ( add, [7, 8] )
+ ( add, [9, 10] );
+
+console.log(Ω(1).number); // 19
+console.log(Ω(2).number); // 15
+console.log(Ω(3).number); // 11
+console.log(Ω(4).number); //  7
+console.log(Ω(5).number); //  3
+```
+
+And if you pass negative integers:
+
+```
+λ( add, [1, 2] )
+ ( add, [3, 4] )
+ ( add, [5, 6] )
+ ( add, [7, 8] )
+ ( add, [9, 10] );
+
+console.log(Ω(-1).number); //  3
+console.log(Ω(-2).number); //  7
+console.log(Ω(-3).number); // 11
+console.log(Ω(-4).number); // 15
+console.log(Ω(-5).number); // 19
+```
+
+Please note, passing `0` as a parameter to `Ω` function is undefined behavior, and the library will throw an error.
+
+### Example 9
 
 Last, but not least, `λ.reset()` is available to clear all `lambda-math` state, and reset the results stack to zero.
 
