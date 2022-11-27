@@ -1,17 +1,19 @@
-# Lambda math
+# lambda-math
+
+pseudo lambda expressions for javascript arbitrary-precision arithmetic operations
+
+## about
 
 [![Build Status](https://travis-ci.org/valera-rozuvan/lambda-math.svg?branch=master)](https://travis-ci.org/valera-rozuvan/lambda-math)
 [![npm version](https://badge.fury.io/js/lambda-math.svg)](https://badge.fury.io/js/lambda-math)
 
-Pseudo lambda expressions for JS arbitrary-precision arithmetic operations.
-
-## Install
+## install
 
 ```
 npm install --save lambda-math
 ```
 
-## Example
+## example
 
 Consider adding the floating point number `300 / 293` many times. 72 times in fact. Now, we don't want to simply multiply a number by 72. We want to add it 72 times. This way, we can clearly see the problem with floating point number rounding which exists in standard JavaScript.
 
@@ -59,11 +61,11 @@ console.log(λ[1].string); // '73.72013651877133105776'
 
 As you can see, the pseudo lambda approach doesn't have the problem with rounding floating point numbers. Also, some (mathematicians) can argue that the syntax `lambda-math` introduces is more elegant, shorter, and cleaner overall (compared to pure JavaScript way of doing things).
 
-## Internals
+## internals
 
 Besides adding pseudo syntactic sugar, `lambda-math` uses [bignumber.js](https://www.npmjs.com/package/bignumber.js) under the hood for actual arbitrary-precision decimal arithmetic.
 
-## Library API
+## library api
 
 The library `lambda-math` exports the symbols `λ`, `Ω`, and `Σ`, along with a number of mathematical functions. At the moment there are just 4 arithmetic functions available. Addition, subtraction, multiplication, and division:
 
@@ -86,7 +88,7 @@ The function `Ω` can be used to easily index any of the results produced by the
 
 Some examples follow below to better demonstrate these concepts.
 
-### Example 1
+### example 1
 
 ```
 λ(add, [1, 2]);
@@ -97,7 +99,7 @@ let c = add(1, 2);
 console.log(c.toNumber()); // 3
 ```
 
-### Example 2
+### example 2
 
 ```
 λ(add, [3, 4], [5, 6]);
@@ -109,7 +111,7 @@ c = add(5, 6);
 console.log(c.toNumber()); // 11
 ```
 
-### Example 3
+### example 3
 
 ```
 λ(add, [3, 4], [Σ, 6]);
@@ -121,7 +123,7 @@ c = add(c, 6);
 console.log(c.toNumber()); // 13
 ```
 
-### Example 4
+### example 4
 
 ```
 λ(add, [3, 4], 10);
@@ -135,7 +137,7 @@ for (let i = 0; i < 10; i += 1) {
 console.log(c.toNumber()); // 7
 ```
 
-### Example 5
+### example 5
 
 ```
 λ(add, [3, 4], [Σ, 1], 10);
@@ -149,7 +151,7 @@ for (let i = 0; i < 10; i += 1) {
 console.log(c.toNumber()); // 17
 ```
 
-### Example 6
+### example 6
 
 Besides using `λ` as a function, you can also access the results of each invocation of the function via the array index, starting from 0. So first invocation of `λ` will store the result as `λ[0]`, second invocation as `λ[1]`, and so on. For convenience, `λ[i].number` will contain the JavaScript `number` result value, `λ[i].string` will contain the JavaScript `string` result value, and `λ[i]` will contain the `BigNumber` result value.
 
@@ -167,7 +169,7 @@ console.log(λ[1].string); // '7'
 console.log(λ[2].string); // '11'
 ```
 
-### Example 7
+### example 7
 
 You can also chain any number of calls to `λ`, and this will not have any affect on your program:
 
@@ -183,7 +185,7 @@ console.log(λ[2].number); // 11
 
 This is possible due to the fact that an invocation of `λ` returns an instance of itself ;)
 
-### Example 8
+### example 8
 
 If you want to quickly reference some of the latest `λ` results, but don't want to store the invocation number in a variable, `lambda-math` provides the `Ω` function. This function has two goals.
 
@@ -232,7 +234,7 @@ console.log(Ω(-5).number); // 19
 
 Please note, passing `0` as a parameter to `Ω` function is undefined behavior, and the library will throw an error.
 
-### Example 9
+### example 9
 
 Last, but not least, `λ.reset()` is available to clear all `lambda-math` state, and reset the results stack to zero.
 
@@ -262,14 +264,28 @@ console.log(λ[4]); // undefined
 console.log(λ[5]); // undefined
 ```
 
-## Running tests
+## running tests
 
 Clone this repo, do `npm install`, followed by `npm run test`.
 
-## Lint the source code
+## lint the source code
 
 You can use ESLint to check for potential problems in source code by running `npm run lint`.
 
-## License
+---
 
-MIT License. See [LICENSE](LICENSE) for more details.
+## license
+
+The project `'lambda-math'` is licensed under the MIT License.
+
+See [LICENSE](./LICENSE) for more details.
+
+The latest source code can be retrieved from one of several mirrors:
+
+1. [github.com/valera-rozuvan/lambda-math](https://github.com/valera-rozuvan/lambda-math)
+
+2. [gitlab.com/valera-rozuvan/lambda-math](https://gitlab.com/valera-rozuvan/lambda-math)
+
+3. [git.rozuvan.net/lambda-math](https://git.rozuvan.net/lambda-math)
+
+Copyright (c) 2014-2022 [Valera Rozuvan](https://valera.rozuvan.net/)
