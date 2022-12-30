@@ -24,7 +24,7 @@
     "chai": "4.2.0",
     "eslint": "^7.11.0",
     "eslint-config-google": "^0.14.0",
-    "mocha": "8.1.1"
+    "mocha": "8.4.0"
   },
   "dependencies": {
     "bignumber.js": "9.0.0"
